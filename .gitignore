@@ -1,6 +1,7 @@
 # Markdown stuff
 *.md
 !README.md
+!CHANGELOG.md
 
 # macOS stuff
 .DS_Store
