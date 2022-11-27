@@ -1,9 +1,7 @@
-#!/usr/bin/env python3
+from .models.Recipe import Recipe
+from .version import RECIPE_WRITER_VERSION
 
-from Recipe import Recipe
-from version import RECIPE_WRITER_VERSION
-
-def main():
+def recipe_writer():
     print("Welcome to recipe writer!")
     print(f"Version: {RECIPE_WRITER_VERSION}\n")
 
@@ -25,6 +23,3 @@ def main():
         do_another = input("Would you like to add another recipe? [Y/n] ")
         if do_another == "N" or do_another == "n":
             create_recipe = False
-
-if __name__ == "__main__":
-    main()

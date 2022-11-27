@@ -1,9 +1,8 @@
 from pathlib import Path
-from version import RECIPE_WRITER_VERSION
+from ..version import RECIPE_WRITER_VERSION
 
 ORDERED = True
 UNORDERED = False
-
 
 class Recipe():
     def __init__(self, name):
