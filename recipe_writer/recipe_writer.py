@@ -1,6 +1,7 @@
 from .models.Recipe import Recipe
 from .version import RECIPE_WRITER_VERSION
 
+
 def recipe_writer():
     print("Welcome to recipe writer!")
     print(f"Version: {RECIPE_WRITER_VERSION}\n")
@@ -8,7 +9,10 @@ def recipe_writer():
     create_recipe = True
     while create_recipe:
         print("Creating new recipe")
-        name = input("Name: ")
+        name = ""
+        while not name:
+            name = input("Name: ")
+
         recipe = Recipe(name)
         print()
 
@@ -21,5 +25,4 @@ def recipe_writer():
         recipe.write_to_file()
 
         do_another = input("Would you like to add another recipe? [Y/n] ")
-        if do_another == "N" or do_another == "n":
-            create_recipe = False
+        create_recipe = do_another.lower() != "n"

@@ -1,11 +1,13 @@
 import pytest
+
 try:
     import mock
 except:
     import unittest.mock as mock
 
-from .context import recipe_writer
 from recipe_writer.models.Recipe import Recipe
+
+from .context import recipe_writer
 
 
 def test_recipe_init():
@@ -60,6 +62,8 @@ def test_fill_list(mock_input_func, is_ordered):
     assert mock_input_func.call_count == 4
     assert a_list == ["potatoes", "carrots", "turkey"]
     if is_ordered:
-        mock_input_func.assert_has_calls([mock.call("  1. "), mock.call("  2. "), mock.call("  3. "), mock.call("  4. ")])
+        mock_input_func.assert_has_calls(
+            [mock.call("  1. "), mock.call("  2. "), mock.call("  3. "), mock.call("  4. ")]
+        )
     else:
         mock_input_func.assert_has_calls([mock.call("  - ")] * 4)

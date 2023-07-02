@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactor code to make it more concise
 
 
+## 0.2.1 - 2023-07-01
+
+### Changed
+- Standardize code formatting
+- Minor refactoring to follow Python conventions
+
+
 ## 0.2.0 - 2022-11-27
 
 ### Added
@@ -21,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changelog
 
 ### Changed
-- Restructured code into a Python package
+- Restructure code into a Python package
 
 
 ## 0.1.0 - 2022-03-06

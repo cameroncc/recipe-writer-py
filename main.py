@@ -4,4 +4,3 @@ try:
     recipe_writer.recipe_writer()
 except KeyboardInterrupt:
     print("\nExiting...")
-    pass

@@ -1,10 +1,12 @@
 from pathlib import Path
+
 from ..version import RECIPE_WRITER_VERSION
 
 ORDERED = True
 UNORDERED = False
 
-class Recipe():
+
+class Recipe:
     def __init__(self, name):
         self.name = name
         self.ingredients = []
@@ -35,37 +37,35 @@ class Recipe():
     def write_to_file(self):
         outfilename = self._create_filename(self.name)
         while Path(f"./{outfilename}").exists():
-            temp = input(f"File \"{outfilename}\" already exists. Please choose a different name: ")
+            temp = input(f'File "{outfilename}" already exists. Please choose a different name: ')
             outfilename = self._create_filename(temp.replace(".md", ""))
 
-        print(f"Writing recipe for \"{self.name}\" to file \"{outfilename}\"")
-        outfile = open(outfilename, 'w')
-        outfile.write(f"## {self.name}\n\n### Ingredients\n")
-        for item in self.ingredients:
-            outfile.write(f"  - {item}\n")
+        print(f'Writing recipe for "{self.name}" to file "{outfilename}"')
+        output_lines = [f"## {self.name}\n\n### Ingredients\n"]
+        output_lines.extend([f"  - {item}\n" for item in self.ingredients])
 
-        outfile.write(f"\n### Directions\n")
-        count = 1
-        for item in self.directions:
-            outfile.write(f"  {count}. {item}\n")
-            count += 1
+        output_lines.append(f"\n### Directions\n")
+        output_lines.extend([f"  {i}. {item}\n" for i, item in enumerate(self.directions, 1)])
 
-        if len(self.notes) != 0:
-            outfile.write(f"\n### Notes\n")
-            for item in self.notes:
-                outfile.write(f"  - {item}\n")
+        if self.notes:
+            output_lines.append(f"\n### Notes\n")
+            output_lines.extend([f"  - {item}\n" for item in self.notes])
 
-        outfile.write(f"\n[//]: # (Written by recipe-writer-py version {RECIPE_WRITER_VERSION})\n")
-        outfile.close()
-        print(f"Done writing \"{outfilename}\"\n")
+        output_lines.append(
+            f"\n[//]: # (Written by recipe-writer-py version {RECIPE_WRITER_VERSION})\n"
+        )
+        with open(outfilename, "w") as outfile:
+            outfile.writelines(output_lines)
+
+        print(f'Done writing "{outfilename}"\n')
 
     # Create a filename from recipe name, only allowing alphanumeric chars and '_'
     def _create_filename(self, name):
         filename = ""
         for c in name:
             if not c.isalnum():
-                if c == ' ':
-                    filename += '_'
+                if c == " ":
+                    filename += "_"
             else:
                 filename += c
 
@@ -82,7 +82,7 @@ class Recipe():
 
             item = input(input_prompt)
             count += 1
-            if item != "":
+            if item:
                 the_list.append(item)
             else:
                 break
